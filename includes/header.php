@@ -84,8 +84,9 @@ if(!isset($_SESSION['user']) && !isset($_SESSION['Username'])) {
                                     <li><a href="./about">About Us</a></li>
                                     <li><a href="./articles">Articles</a></li>
                                     <li><a href="./write">Write an Article</a></li>
-                                    <li><a href="profile/./">My Space</a></li>
-                                    <li><a style="color: red;" href="profile/./">Welcome <?php echo $_SESSION['Username'] ?> </a></li>
+                                     <li><a href="./myarticles">My Articles</a></li>
+                                    <li><a href="./logout">Logout</a></li>
+                                    <li><a style="color: red;" href="#">Welcome <?php echo $_SESSION['Username'] ?> </a></li>
                                 </ul>
                             </div>
                             <!-- Nav End -->

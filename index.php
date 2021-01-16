@@ -53,11 +53,11 @@
                 <!-- Single About Us Content -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="about-us-content mb-100">
-                        <img src="img/bg-img/1.jpg" alt="">
+                        <img src="img/bg-img/13.jpg" alt="">
                         <div class="about-text">
                             <h4>Who we are</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                            <p>We are committed to sharing insightful articles, opinions, and materials that will help teens and youths become all they can be, leveraging the opportunities around and within them.</p>
+                            <a href="./about">Read More <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -65,11 +65,11 @@
                 <!-- Single About Us Content -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="about-us-content mb-100">
-                        <img src="img/bg-img/4.jpg" alt="">
+                        <img src="img/bg-img/15.jpg" alt="">
                         <div class="about-text">
                             <h4>What we do</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                            <p>We’re committed to sharing inspiring and life-transforming articles to help change your life for good.</p>
+                            <a href="./about">Read More <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -77,11 +77,11 @@
                 <!-- Single About Us Content -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="about-us-content mb-100">
-                        <img src="img/bg-img/5.jpg" alt="">
+                        <img src="img/bg-img/31.jpg" alt="">
                         <div class="about-text">
                             <h4>What we`ve done</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                            <p>Join the revolution of teens, young adult, and youths. TeensYouths® is a vibrant community for teens & youths from all over the world, offering inspiring insight and opinion on a variety of topics.</p>
+                            <a href="./about">Read More <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>

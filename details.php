@@ -1,4 +1,12 @@
-<?php include("functions/top.php"); ?>
+<?php include("functions/top.php");
+if (!isset($_GET['id'])) {
+    
+    redirect("./articles");
+} else {
+
+    $data = $_GET['']
+}
+ ?>
 
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
@@ -141,7 +149,7 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h6>Sermon News</h6>
+                                <h6>Related Articles</h6>
                             </div>
 
                             <!-- Single Latest Posts -->
@@ -156,58 +164,12 @@
                                 </div>
                             </div>
 
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post">
-                                <a href="#" class="post-title">
-                                    <h6>Six important methods to...</h6>
-                                </a>
-                                <div class="sermons-meta-data">
-                                    <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                    <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post">
-                                <a href="#" class="post-title">
-                                    <h6>New management method...</h6>
-                                </a>
-                                <div class="sermons-meta-data">
-                                    <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                    <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post">
-                                <a href="#" class="post-title">
-                                    <h6>Seven ways to get ready for...</h6>
-                                </a>
-                                <div class="sermons-meta-data">
-                                    <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                    <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                                </div>
-                            </div>
+                            
+                            
 
                         </div>
 
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h6>Sermon Speaker</h6>
-                            </div>
-                            <ol class="crose-catagories">
-                                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Kyleigh Lam</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Thomas Jack</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Garry Rick</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> John Smith</a></li>
-                            </ol>
-                        </div>
-
+                        
                     </div>
                 </div>
             </div>

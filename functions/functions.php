@@ -325,7 +325,7 @@ function signin_user($email, $pword) {
 		$_SESSION['Username'] = $hey;
 
 		echo "Loading...Please wait!";												
-		echo '<script>window.location.href ="./"</script>';
+		echo '<script>window.location.href ="./myarticles"</script>';
 		} else {
 
 		echo "Invalid login details";
@@ -412,54 +412,5 @@ if (isset($_POST['fnxpword']) && isset($_POST['fnxcpword']) && isset($_POST['fnz
 
    echo "Loading...Please wait!";												
    echo '<script>window.location.href ="./recovered"</script>';
-}
-
-
-
-//---- write an article -----//
-function write() {
-
-	if (isset($_POST['write']) && $_SERVER["REQUEST_METHOD"] == "POST") {
-
-		$title 		= escape(clean($_POST['title']));
-		$details	= escape(clean($_POST['det']));
-		$quote      = escape(clean($_POST['cite']));
-		$file       = escape(clean($_POST['fileToUpload']));
-
-			$target_dir = "artfile/";
-			$target_file =  basename($_FILES["fileToUpload"]["name"]);
-			$targetFilePath = $target_dir . $target_file;
-			$uploadOk = 1;
-			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	
-			
-			// Allow certain file formats
-			if($imageFileType != "jpg" && $imageFileType != "jpeg") {
-			    echo "Sorry, only JPG and JPEG files are allowed.";
-			    $uploadOk = 0;
-			} else {
-			// Check if $uploadOk is set to 0 by an error
-			if ($uploadOk == 0) {
-			   echo "Sorry, your ads image was not uploaded.";
-			// if everything is ok, try to upload file
-			} else {
-			   
-			   move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFilePath);
-
-	//constants
-	$date 		= date("Y-m-d h:i:sa");
-	$author		= $_SESSION['Username'];
-	$authormail = $_SESSION['user'];
-	$post_url   = str_replace(' ', '-', $title); 
-
-	//insert details into db
-	$sql = "INSERT INTO article(`sn`, `title`, `pix`, `details`, `quote`, `author`, `author_mail`, `view`, `datepost`, `post_url`)";
-	$sql.= "VALUES('1', '$title', '$target_file', '$details', '$quote', '$author', '$authormail', '0', '$date', '$post_url')";
-	$res = query($sql);
-
-	//redirect("./articles?id=$post_url");
-	}
-}
-}
 }
 ?>

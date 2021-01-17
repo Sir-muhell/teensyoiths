@@ -1,10 +1,21 @@
 <?php include("functions/top.php");
 
-if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
+if (!isset($_GET['id']) && !isset($_GET['lead'])) {
     
-    redirect("./signup");
-}
+    redirect("./articles");
+} else {
+    $data = $_GET['id'];
+    $lead = $_GET['lead'];
+$sql = "SELECT * FROM article WHERE `post_url` = '$data' AND `pidr` = '$lead'";
+$res = query($sql);
+if (row_count($res) == "") {
+    
+    redirect("./articles");
+} else {
 
+    $row = mysqli_fetch_array($res);
+}
+}
  ?>
 
         <!-- ##### Hero Area Start ##### -->
@@ -16,8 +27,8 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slides-content">
-                            <h2 data-animation="fadeInUp" data-delay="100ms">THE GEN-X REVOLUTION</h2>
-                            <p data-animation="fadeInUp" data-delay="300ms">Share what you`ve got for us today!</p>
+                            <h2 data-animation="fadeInUp" data-delay="100ms">Edit Article</h2>
+                            <p data-animation="fadeInUp" data-delay="300ms">Saw an error? Let fix it asap!</p>
                         </div>
                     </div>
                 </div>
@@ -33,46 +44,42 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
             <div class="row">
                 <div class="col-12">
                     <div class="contact-content-area">
-                        <div class="row">
-                <div class="col-12">
-                    <div class="section-heading">
-                        <h2>Let`s get your article ready</h2>
-                        <p>Required fields are marked.</p>
-                    </div>
-                </div>
-            </div>
+                        
                 <div class="row">
                 <div class="col-12">
                     <!-- Contact Form Area -->
                     <div class="contact-form-area">
-                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <form action="update.php" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="contact-name">Article Title*:</label>
-                                        <input name="title" type="text" class="form-control" id="contact-name" placeholder="Input your article title here" required>
+                                        <input name="title" type="text" value="<?php echo $row['title'] ?>" class="form-control" id="contact-name" placeholder="Input your article title here" required>
                                     </div>
                                 </div>
+
+                                <input name="idn" type="text" value="<?php echo $row['pidr'] ?>" class="form-control" id="contact-name" placeholder="Input your article title here" hidden>
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="message">Article Details*:</label>
-                                        <textarea name="det" class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Lets your view on the subject matter" required></textarea>
+                                        <textarea name="det" class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Lets your view on the subject matter" required><?php echo $row['details'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="message">Cite a Quote:</label>
-                                        <textarea name="cite" class="form-control" name="message" id="message" cols="30" rows="10" placeholder="You can cite a quote here if the need be. This field is optional"></textarea>
+                                        <textarea name="cite" class="form-control" name="message" id="message" cols="30" rows="10" placeholder="You can cite a quote here if the need be. This field is optional"><?php echo $row['quote'] ?></textarea>
                                     </div>
                                 </div>
                                  <div class="col-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="contact-number">Upload an article image <span style="color: red;">(.jpg and .Jpeg formats only)</span>*:</label>
-                                       <input type="file" name="fileToUpload" class="form-control" id="fileToUpload" required>
+                                       <input type="file" name="fileToUpload" class="form-control" id="fileToUpload">
                                     </div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button name="write" type="submit" class="btn crose-btn mt-15">Next Step</button>
+                                    <button name="update" type="submit" class="btn crose-btn mt-15">Update</button>
                                 </div>
                             </div>
                         </form>

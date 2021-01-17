@@ -101,9 +101,9 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                                 <p><?php echo $row['details']; ?></p>
                                  <div class="share">
                                         <span>Share: </span>
-                                        <a target="_blank" href="https://facebook.com/sharer.php?u="><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
-                                        <a target="_blank" href="https://twitter.com/home?status="><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
-                                        <a target="_blank" href="https://api.whatsapp.com/send?text="><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://facebook.com/sharer.php?u="><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://twitter.com/home?status="><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://api.whatsapp.com/send?text="><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                                     </div>
                             </div>
                             <div class="find-out-more-btn">

@@ -221,4 +221,48 @@ $("#frgtnxt").click(function()
 
 	$("#exampleModalCenter").modal();
 })
+
+//post comment
+$("#cbtn").click(function() 
+{
+
+	var cfname    = $("#cfname").val();
+	var cemail    = $("#cemail").val();
+	var cpost     = $("#cpost").val();
+	var cxt       = $("#cxt").val();
+
+	if (cfname == '' || cfname == null) {
+
+	$('#msg').html("Please input your name");	
+	} else {
+
+	if (cemail == null || cemail == '') {
+
+	$('#msg').html("Please input your email");
+	} else {
+
+	if (cxt == null || cxt == '') {
+
+	$('#msg').html("What`s on your mind?");
+	} else {
+
+	$.ajax
+    (
+    {
+        type        :  'post',
+        url         :  'functions/init.php',
+        data        :  {cfname:cfname,cemail:cemail,cpost:cpost,cxt:cxt},
+        success     :  function(data)
+        {
+            $('#msg').html(data);
+        }
+    }
+        )
+
+	}
+	}
+	}
+
+$("#exampleModalCenter").modal();
+})
 })	

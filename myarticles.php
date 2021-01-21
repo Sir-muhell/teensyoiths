@@ -77,6 +77,10 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                     
                 } else {
                 while($row = mysqli_fetch_array($res)) {
+                    $det = $row['details'];
+                    $z = str_word_count($det);
+                    $w = "...";
+                    $y = substr_replace($det, $w, $z);
                 ?>
 
                 <div class="col-12">
@@ -84,7 +88,7 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                     <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
                         <!-- Thumbnail -->
                         <div class="upcoming-events-thumbnail">
-                            <img src="<?php echo $row['pix']; ?>" alt="">
+                            <img style="width: 100%; height: 200px;" src="<?php echo $row['pix']; ?>" alt="">
                         </div>
                         <!-- Content -->
                         <div class="upcoming-events-content d-flex flex-wrap align-items-center">
@@ -98,7 +102,7 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                                     <a style="text-decoration: none;" href="#"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo $row['view']; ?></a>
                                 </div>
 
-                                <p><?php echo $row['details']; ?></p>
+                                <p><?php echo $y; ?></p>
                                  <div class="share">
                                         <span>Share: </span>
                                         <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://facebook.com/sharer.php?u="><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
@@ -107,7 +111,7 @@ if (!isset($_SESSION['Username']) || !isset($_SESSION['user'])) {
                                     </div>
                             </div>
                             <div class="find-out-more-btn">
-                                <a href="./details?read=<?php echo $row['post_url']; ?>" class="btn crose-btn btn-2">Read More</a>
+                                <a href="./<?php echo $row['post_url']; ?>" class="btn crose-btn btn-2">Read More</a>
                             </div>
                         </div>
                     </div>

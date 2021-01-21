@@ -31,6 +31,10 @@
                     echo 'No uploaded articles yet';
                 } else {
                 while($row = mysqli_fetch_array($res)) {
+                    $det = $row['details'];
+                    $z = str_word_count($det);
+                    $w = "...";
+                    $y = substr_replace($det, $w, $z);
                 ?>
                         <!-- Single Blog Post Area -->
                         <div class="col-12 col-md-6">
@@ -47,8 +51,8 @@
                                         <a style="text-decoration: none;" href="#"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo $row['view'] ?></a>
 
                                     </div>
-                                    <p class="post-excerpt"><?php echo $row['details']; ?></p>
-                                    <a style="text-decoration: none; color: #ff0000;" href="./details?read=<?php echo $row['post_url']; ?>"> Read More</a>
+                                    <p class="post-excerpt"><?php echo $y; ?></p>
+                                    <a style="text-decoration: none; color: #ff0000;" href="./<?php echo $row['post_url']; ?>"> Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -63,16 +67,6 @@
                 <!-- Sidebar Area -->
                 <div class="col-12 col-lg-3">
                     <div class="post-sidebar-area">
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <div class="search-form">
-                                <form action="#" method="get">
-                                    <input type="search" name="search" placeholder="Search Here">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                        </div>
 
 
                         <!-- ##### Single Widget Area ##### -->
@@ -91,10 +85,10 @@
                 ?>
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post">
-                                <a href="./details?read=<?php echo $row['post_url']; ?>" class="post-title">
+                                <a style="text-decoration: none;" href="./<?php echo $row['post_url']; ?>" class="post-title">
                                     <h6><?php echo $row['title']; ?></h6>
                                 </a>
-                                <p class="post-date"><?php echo date('D, M d, Y  h:i:sa', strtotime($row['datepost'])) ?></p>
+                                <p class="post-date"><?php echo date('D, M d, Y', strtotime($row['datepost'])) ?></p>
                             </div>
                             <?php 
                         }

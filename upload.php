@@ -31,12 +31,22 @@ if ($uploadOk == 0) {
     $post_url   = str_replace(' ', '-', $title); 
     $pidr       = "tny-".rand(0, 9999);
 
+    //check if title exist
+    $ssl = "SELECT * FROM article WHERE `post_url` = '$post_url'";
+    $rsl = query($ssl);
+    if (row_count($rsl) == 1) {
+      
+      //asign a new post_url 
+      $post_url = str_replace(' ', '-', $title).rand(0, 99);
+
+    } 
+
     //insert details into db
-    $sql = "INSERT INTO article(`sn`, `title`, `pix`, `details`, `quote`, `author`, `author_mail`, `view`, `datepost`, `post_url`, `pidr`)";
-    $sql.= "VALUES('1', '$title', '$target_file', '$details', '$quote', '$author', '$authormail', '0', '$date', '$post_url', '$pidr')";
+    $sql = "INSERT INTO article(`sn`, `title`, `pix`, `details`, `quote`, `author`, `author_mail`, `view`, `datepost`, `post_url`, `pidr`, `totview`)";
+    $sql.= "VALUES('1', '$title', '$target_file', '$details', '$quote', '$author', '$authormail', '0', '$date', '$post_url', '$pidr', '0')";
     $res = query($sql);
 
-    $_SESSION['msg'] = "  Your articles was uploaded successfully. You can edit as well as delete it whenever you wish to.  ";
+    $_SESSION['msg'] = "  Your article was uploaded successfully. You can edit and delete the article whenever you wish to.  ";
 
     redirect("./myarticles");
 

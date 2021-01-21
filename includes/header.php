@@ -60,14 +60,10 @@ if(!isset($_SESSION['user']) && !isset($_SESSION['Username'])) {
                                     <li><a href="./">Home</a></li>                                  
                                     <li><a href="./about">About Us</a></li>
                                     <li><a href="./articles">Articles</a></li>
-                                    <li><a href="./authors">Authors</a></li>
                                     <li><a href="./write">Write an Article</a></li>
                                     
                                     <li><a href="./signin">Sign in</a></li>
                                 </ul>
-
-                                <!-- Search Button -->
-                                <div id="header-search"><i class="fa fa-search" aria-hidden="true"></i></div>
 
                                 <!-- Donate Button -->
                                 <a href="./signup" class="btn crose-btn header-btn">Sign up</a>

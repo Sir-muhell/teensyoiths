@@ -120,62 +120,45 @@
             </div>
 
             <div class="row justify-content-center">
+
+                 <?php
+                $sql = "SELECT * FROM article ORDER BY view desc";
+                $res = query($sql);
+                if (row_count($res) == "") {
+                    echo 'No uploaded articles yet';
+                } else {
+                while($row = mysqli_fetch_array($res)) {
+                    $det = $row['details'];
+                    $z = str_word_count($det);
+                    $w = "...";
+                    $y = substr_replace($det, $w, $z);
+                ?>
                 <!-- Single Blog Post Area -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-blog-post mb-100">
                         <div class="post-thumbnail">
-                            <a href="single-post.html"><img src="img/bg-img/10.jpg" alt=""></a>
+                            <a style="text-decoration: none;" href="<?php echo $row['post_url']; ?>"><img style="width: 100%; height: 300px;" src="<?php echo $row['pix']; ?>" alt=""></a>
                         </div>
                         <div class="post-content">
-                            <a href="single-post.html" class="post-title">
-                                <h4>Mexican priest murdered in his church</h4>
+                            <a style="text-decoration: none;" href="<?php echo $row['post_url']; ?>" class="post-title">
+                                <h4><?php echo $row['title']; ?></h4>
                             </a>
                             <div class="post-meta d-flex">
-                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Luke Coppen</a>
-                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 23, 2018</a>
+                                <a style="text-decoration: none;" href="#"><i class="fa fa-user" aria-hidden="true"></i> <?php echo $row['author']; ?></a>
+                                <a style="text-decoration: none;" href="#"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo $row['view']; ?></a>
                             </div>
-                            <p class="post-excerpt">The priest, who was also the diocesan judicial vicar, was accosted by the assailant and was involved in a discussion.</p>
+                            <p class="post-excerpt"><?php echo $y; ?></p>
+                            <a style="text-decoration: none;" href="<?php echo $row['post_url']; ?>">Read More</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Single Blog Post Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-blog-post mb-100">
-                        <div class="post-thumbnail">
-                            <a href="single-post.html"><img src="img/bg-img/11.jpg" alt=""></a>
-                        </div>
-                        <div class="post-content">
-                            <a href="single-post.html" class="post-title">
-                                <h4>A daily guide to what's open in the Catholic Church</h4>
-                            </a>
-                            <div class="post-meta d-flex">
-                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Staff Reporter</a>
-                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 03, 2018</a>
-                            </div>
-                            <p class="post-excerpt">The Liturgy helps us to “rediscover our identity as disciples of the Risen Lord”, Pope Francis said at the Regina Caeli.</p>
-                        </div>
-                    </div>
-                </div>
+               <?php
+           }
+       }
+       ?>
 
-                <!-- Single Blog Post Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-blog-post mb-100">
-                        <div class="post-thumbnail">
-                            <a href="single-post.html"><img src="img/bg-img/12.jpg" alt=""></a>
-                        </div>
-                        <div class="post-content">
-                            <a href="single-post.html" class="post-title">
-                                <h4>The Bishop of Dromore was right to resign.</h4>
-                            </a>
-                            <div class="post-meta d-flex">
-                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Lucie Smith</a>
-                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> April 15, 2018</a>
-                            </div>
-                            <p class="post-excerpt">God comes to us in free and undeserved favor in the person of Jesus Christ who lived, died, and rose for us that we might belong to God.</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -204,155 +187,45 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="upcoming-slides owl-carousel">
-
+                             <?php
+                $sql2 = "SELECT * FROM article ORDER BY id asc";
+                $res2 = query($sql2);
+                if (row_count($res2) == "") {
+                    echo 'No uploaded articles yet';
+                } else {
+                while($row2 = mysqli_fetch_array($res2)) {
+                    $det = $row2['details'];
+                    $z = str_word_count($det);
+                    $w = "...";
+                    $y = substr_replace($det, $w, $z);
+                    ?>
                             <div class="single-slide">
                                 <!-- Single Upcoming Events Area -->
                                 <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
                                     <!-- Thumbnail -->
                                     <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/23.jpg" alt="">
+                                        <img style="width: 100%; height: 200px;" src="<?php echo $row2['pix']; ?>" alt="">
                                     </div>
                                     <!-- Content -->
                                     <div class="upcoming-events-content d-flex flex-wrap align-items-center">
                                         <div class="events-text">
-                                            <h4>Seeing and Savoring Jesus Christ</h4>
+                                            <h4><?php echo $row2['title']; ?></h4>
                                             <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 01, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 09:00 - 11:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 11 Rose St, Brooklyn, NY</a>
+                                                <a style="text-decoration: none" href="#"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date('D, M d, Y', strtotime($row2['datepost'])) ?></a>
+                                                <a style="text-decoration: none" href="#"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo $row2['view']; ?></a>
                                             </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                                            <p><?php echo $y; ?></p>
                                         </div>
                                         <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Upcoming Events Area -->
-                                <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
-                                    <!-- Thumbnail -->
-                                    <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/24.jpg" alt="">
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="upcoming-events-content d-flex flex-wrap align-items-center">
-                                        <div class="events-text">
-                                            <h4>A God-Entranced Vision of All Things</h4>
-                                            <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 15, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 11:00 - 13:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 22 Maly St, Matatin, RYO</a>
-                                            </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
-                                        </div>
-                                        <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Upcoming Events Area -->
-                                <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
-                                    <!-- Thumbnail -->
-                                    <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/25.jpg" alt="">
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="upcoming-events-content d-flex flex-wrap align-items-center">
-                                        <div class="events-text">
-                                            <h4>Speaker Interviews with J.Doe</h4>
-                                            <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 19, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 09:00 - 17:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 17 Buit St, Center Disce, LA</a>
-                                            </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
-                                        </div>
-                                        <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
+                                            <a href="<?php echo $row2['post_url']; ?>" class="btn crose-btn btn-2">Find Out More</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="single-slide">
-                                <!-- Single Upcoming Events Area -->
-                                <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
-                                    <!-- Thumbnail -->
-                                    <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/23.jpg" alt="">
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="upcoming-events-content d-flex flex-wrap align-items-center">
-                                        <div class="events-text">
-                                            <h4>Seeing and Savoring Jesus Christ</h4>
-                                            <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 01, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 09:00 - 11:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 11 Rose St, Brooklyn, NY</a>
-                                            </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
-                                        </div>
-                                        <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Upcoming Events Area -->
-                                <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
-                                    <!-- Thumbnail -->
-                                    <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/24.jpg" alt="">
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="upcoming-events-content d-flex flex-wrap align-items-center">
-                                        <div class="events-text">
-                                            <h4>A God-Entranced Vision of All Things</h4>
-                                            <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 15, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 11:00 - 13:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 22 Maly St, Matatin, RYO</a>
-                                            </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
-                                        </div>
-                                        <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Upcoming Events Area -->
-                                <div class="single-upcoming-events-area d-flex flex-wrap align-items-center">
-                                    <!-- Thumbnail -->
-                                    <div class="upcoming-events-thumbnail">
-                                        <img src="img/bg-img/25.jpg" alt="">
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="upcoming-events-content d-flex flex-wrap align-items-center">
-                                        <div class="events-text">
-                                            <h4>Speaker Interviews with J.Doe</h4>
-                                            <div class="events-meta">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 19, 2018</a>
-                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 09:00 - 17:00</a>
-                                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 17 Buit St, Center Disce, LA</a>
-                                            </div>
-                                            <p>Join us for an informational webinar about the U.S.-Japan COIL Initiative. Learn about the initiative and receive general guidance.</p>
-                                            <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
-                                        </div>
-                                        <div class="find-out-more-btn">
-                                            <a href="#" class="btn crose-btn btn-2">Find Out More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php
+                        }
+                        }
+                        ?>
                         </div>
                     </div>
                 </div>

@@ -413,4 +413,65 @@ if (isset($_POST['fnxpword']) && isset($_POST['fnxcpword']) && isset($_POST['fnz
    echo "Loading...Please wait!";												
    echo '<script>window.location.href ="./recovered"</script>';
 }
+
+
+
+//-------- post comment ---------//
+if (isset($_POST['cfname']) && isset($_POST['cemail']) && isset($_POST['cpost']) && isset($_POST['cxt'])) {
+	
+	$cfname 	=   escape(clean($_POST['cfname']));
+	$cemail		= 	escape(clean($_POST['cemail']));
+	$cpost		= 	escape(clean($_POST['cpost']));
+	$cxt		= 	escape(clean($_POST['cxt']));
+	$date       =   date("Y-m-d h:i:sa");
+
+	//insert records into db
+	$sql  = "INSERT INTO comment(`fname`, `email`, `text`, `post_url`, `date`)";
+	$sql .= "VALUES('$cfname', '$cemail', '$cxt', '$cpost', '$date')";
+	$res  = query($sql);
+
+   echo "Loading...Please wait!";												
+   echo '<script>window.location.href ="'.$cpost.'"</script>';
+
+}
+
+
+
+
+
+
+
+
+
+
+//---------------  admin dashboard functions ---------//
+if (isset($_POST['password'])) {
+	
+		$admission       = escape(clean("teenstoyouth"));
+		$password   	 = escape(clean(md5($_POST['password'])));
+
+		$sql 	= "SELECT `password` FROM `admin` WHERE `user` = '$admission'";
+		$result = query($sql);
+
+		if(row_count($result) == 1) {
+			$row = mysqli_fetch_array($result);
+
+			$user_password = $row['password'];
+
+			if($password == $user_password) {
+
+				$_SESSION['admin'] = $admission;
+
+				 echo 'Loading.. Please wait';	
+				 echo '<script>window.location.href ="./"</script>';
+
+		} else {
+
+	echo "Incorrect Password";
+}
+} else {
+
+	echo "Wrongly typed password";
+}
+}
 ?>

@@ -1,10 +1,86 @@
 <?php include("functions/top.php");
-if (!isset($_GET['id'])) {
+if (!isset($_GET['read'])) {
     
     redirect("./articles");
 } else {
 
-    $data = $_GET['']
+    $data = $_GET['read'];
+    $sql = "SELECT * FROM article WHERE `post_url` = '$data'";
+    $res = query($sql);
+    if (row_count($res) == "") {
+        
+      redirect("./opps");  
+    } else {
+
+        $row = mysqli_fetch_array($res);
+
+        $ipp  = $_SERVER['SERVER_ADDR'];  // get ip address
+        $post_url = $data;
+
+        if (isset($_SESSION['Username'])) {
+        
+        $user = $_SESSION['Username'];
+
+        //chck if the user match article author
+        if ($row['author'] == $user) {
+            //do nothing
+        } else {
+
+        //chck if IP exists
+        $ssl = "SELECT * FROM viewer WHERE `art` = '$data' AND `ip` = '$ipp'";
+        $rsl = query($ssl);
+        if (row_count($rsl) == '') {            
+          
+        //insert ip address into db
+        $isl = "INSERT INTO viewer(`ip`, `art`)";
+        $isl.= "VALUES('$ipp', '$data')";
+        $qws = query($isl);
+
+        //get the view last value
+        $we = "SELECT * FROM article WHERE `post_url` = '$data'";
+        $ew = query($we);
+        $my = mysqli_fetch_array($ew);
+
+        $vw = $my['view'] + 1;
+
+        //update views
+        $drt = "UPDATE article SET `view` = '$vw' WHERE `post_url` = '$data'";
+        $drs = query($drt);
+
+        } else {
+        //do nothing
+        }
+        }
+    } else {
+
+
+        //chck if IP exists
+        $ssl = "SELECT * FROM viewer WHERE `art` = '$data' AND `ip` = '$ipp'";
+        $rsl = query($ssl);
+        if (row_count($rsl) == '') {            
+          
+        //insert ip address into db
+        $isl = "INSERT INTO viewer(`ip`, `art`)";
+        $isl.= "VALUES('$ipp', '$data')";
+        $qws = query($isl);
+
+        //get the view last value
+        $we = "SELECT * FROM article WHERE `post_url` = '$data'";
+        $ew = query($we);
+        $my = mysqli_fetch_array($ew);
+
+        $vw = $my['view'] + 1;
+
+        //update views
+        $drt = "UPDATE article SET `view` = '$vw' WHERE `post_url` = '$data'";
+        $drs = query($drt);
+
+        } else {
+        //do nothing
+        }
+
+    }
+    }
 }
  ?>
 
@@ -37,37 +113,43 @@ if (!isset($_GET['id'])) {
                         <!-- Sermons Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
-                                <h2 class="post-title mb-30">Start a New Way of Living</h2>
-                                <img class="mb-30" src="img/bg-img/32.jpg" alt="">
+                                <h2 class="post-title mb-30"><?php echo $row['title'] ?></h2>
+                                <img class="mb-30" src="<?php echo $row['pix'] ?>" alt="<?php echo $row['title'] ?>">
                                 <!-- Catagory & Share -->
                                 <div class="catagory-share-meta d-flex flex-wrap justify-content-between align-items-center">
-                                    <div class="sermons-cata">
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                                    </div>
+                                   
                                     <!-- Share -->
                                     <div class="share">
-                                        <span>Share:</span>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        <span>Share: </span>
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://facebook.com/sharer.php?u=https://teensyouths.com.ng/<?php echo $row['post_url'] ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://twitter.com/home?status=https://teensyouths.com.ng/<?php echo $row['post_url'] ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                                        <a target="_blank" data-media="<?php echo $row['pix']; ?>" href="https://api.whatsapp.com/send?text=https://teensyouths.com.ng/<?php echo $row['post_url'] ?>"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                                <p><?php echo $row['details'] ?></p>
+
+                                <?php
+                                if ($row['quote'] != '') {
+                                    ?>
                                 <blockquote>
                                     <div class="blockquote-text">
-                                        <h6>“There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.” </h6>
-                                        <h6>Ollie Schneider - <span>Parson</span></h6>
+                                        <h6>“<?php echo $row['quote'] ?>” </h6>
                                     </div>
                                 </blockquote>
-                                <p>He assignments are fast-paced and our services address client needs for efficiency and flexibility. Our staff is experienced in working with architects, interior design firms, engineers, developers and clients in the public and private sectors.</p>
+                                <?php
+                            }
+                            ?>
                             </div>
                         </div>
 
+                        <?php 
+                        $weds = $row['post_url'];
+                        $sql = "SELECT * FROM comment WHERE `post_url` = '$weds'";
+                        $res = query($sql);
+                        if (row_count($res) == '') {} else {
+                        while ($row3 = mysqli_fetch_array($res)) {
+                            
+                        ?>
                         <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
                             <ol>
@@ -76,21 +158,22 @@ if (!isset($_GET['id'])) {
                                     <div class="comment-wrapper d-flex">
                                         <!-- Comment Meta -->
                                         <div class="comment-author">
-                                            <img src="img/bg-img/28.jpg" alt="">
+                                            <img src="img/2.png" alt="">
                                         </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
-                                            <span class="comment-date">March 15, 2018</span>
-                                            <h5>Lena Headey</h5>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</p>
-                                            <a href="#">Like</a>
-                                            <a href="#">Reply</a>
+                                            <span class="comment-date"><?php echo date('D, M d, Y  ', strtotime($row3['date'])) ?></span>
+                                            <h5><?php echo $row3['fname'] ?></h5>
+                                            <p><?php echo $row3['text'] ?></p>
                                         </div>
                                     </div>
                                 </li>
                             </ol>
                         </div>
-
+                        <?php
+                    }
+                    }
+                    ?>
                         <!-- Leave A Comment -->
                         <div class="leave-comment-area mt-50 clearfix">
                             <div class="comment-form">
@@ -101,26 +184,22 @@ if (!isset($_GET['id'])) {
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="contact-name" placeholder="Name">
+                                                    <input id="cfname" type="text" class="form-control" id="contact-name" placeholder="Name">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                                                    <input id="cemail" type="email" class="form-control" id="contact-email" placeholder="Email">
                                                 </div>
                                             </div>
+                                            <input id="cpost" type="text" class="form-control" id="contact-email" placeholder="Email" value="<?php echo $data ?>" hidden>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="contact-number" placeholder="Website">
+                                                    <textarea id="cxt" class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn crose-btn mt-15">Post Comment</button>
+                                                <button type="button" id="cbtn" class="btn crose-btn mt-15">Post Comment</button>
                                             </div>
                                         </div>
                                     </form>
@@ -135,38 +214,33 @@ if (!isset($_GET['id'])) {
                 <div class="col-12 col-sm-9 col-md-6 col-lg-3">
                     <div class="post-sidebar-area">
 
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <div class="search-form">
-                                <form action="#" method="get">
-                                    <input type="search" name="search" placeholder="Search Here">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                        </div>
 
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h6>Related Articles</h6>
+                                <h6>Articles from the same author</h6>
                             </div>
-
+                            <?php
+                            $rd = $row['author'];
+                $sql2 = "SELECT * FROM article WHERE `author` = '$rd' ORDER BY RAND()";
+                $res2 = query($sql2);
+                if (row_count($res2) == "") {
+                    echo 'No uploaded articles yet';
+                } else {
+                while($row2 = mysqli_fetch_array($res2)) {
+                ?>
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post">
-                                <a href="#" class="post-title">
-                                    <h6>Weekly meeting in companies...</h6>
+                                <a style="text-decoration: none;" href="./<?php echo $row2['post_url']; ?>" class="post-title">
+                                    <h6><?php echo $row2['title']; ?></h6>
                                 </a>
-                                <div class="sermons-meta-data">
-                                    <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                    <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                                </div>
+                                <p class="post-date"><?php echo date('D, M d, Y ', strtotime($row2['datepost'])) ?></p>
                             </div>
-
-                            
-                            
-
+                            <?php 
+                        }
+                    }
+                             ?>
                         </div>
 
                         
@@ -204,6 +278,17 @@ if (!isset($_GET['id'])) {
     <!-- ##### Subscribe Area End ##### -->
 
     <?php include("includes/footer.php"); ?>
+
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background: #f9f9ff; color: #ff0000;" class="modal-content">
+                <div class="modal-body">
+                    <div id="msg" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div> 
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->

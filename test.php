@@ -48,3 +48,15 @@ var x = setInterval(function() {
   }
 }, 1000);
 </script>
+
+
+
+
+<?php
+session_start();
+date_default_timezone_set('Africa/Lagos');
+if(!isset($_SESSION['expire'])){
+      $_SESSION['expire'] = time()+3600;
+}
+$time_remaining = $_SESSION['expire'] - time();
+echo round(abs($time_remaining) / 60, 2) . ' minutes to go ...';

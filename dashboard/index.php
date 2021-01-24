@@ -1,5 +1,9 @@
 <?php
 include("functions/top.php");
+
+//get the last day in a month
+$a_date = date("d-m-Y");
+$tot = date("M t, Y", strtotime($a_date));
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -35,16 +39,12 @@ include("functions/top.php");
                 <span class="info-box-text">All Users</span>
            <?php
                  
- $sql="SELECT SUM(sn) AS total from students";
+ $sql="SELECT SUM(sn) AS total from user";
  $result_set=query($sql);
- while($row= mysqli_fetch_array($result_set))
- {
-  $_SESSION['ts'] = $row['total'];
+ $row= mysqli_fetch_array($result_set);
+ 
          ?>       
-               <span class="info-box-number"><?php echo $_SESSION['ts']; ?></span>
-               <?php
-             }
-             ?>
+               <span class="info-box-number"><?php echo $row['total']; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -59,16 +59,11 @@ include("functions/top.php");
                 <span class="info-box-text">Subscribers</span>
                  <?php
                  
- $sql="SELECT SUM(sn) AS total from staff";
+ $sql="SELECT SUM(sn) AS total from subscribe";
  $result_set=query($sql);
- while($row= mysqli_fetch_array($result_set))
- {
-  $_SESSION['tss'] = $row['total'];
+ $row2= mysqli_fetch_array($result_set);
          ?>       
-                <span class="info-box-number"><?php echo $_SESSION['tss']; ?></span>
-                <?php
-              }
-              ?>
+                <span class="info-box-number"><?php echo $row2['total']; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -81,7 +76,13 @@ include("functions/top.php");
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Articles</span>
-                <span class="info-box-number"></span>
+ <?php
+                 
+ $sql="SELECT SUM(sn) AS total from article";
+ $result_set=query($sql);
+ $row3= mysqli_fetch_array($result_set);
+         ?>       
+                <span class="info-box-number"><?php echo $row3['total']; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -108,20 +109,17 @@ include("functions/top.php");
               </div>
               <!-- /.card-header -->
                <?php
-$r = date("d");
-$s = date("m");
- $sql="SELECT * FROM students WHERE `Date`= '$r' AND `Month` = '$s'";
+ $sql="SELECT * FROM article ORDER BY `view` DESC LIMIT 3";
  $result_set=query($sql);
  while($row= mysqli_fetch_array($result_set))
  {
   ?> 
               <div class="card-body">
-                <a class="title" href="#"><?php echo $row['SurName'] ?> <?php echo $row['Last Name'] ?> <?php echo $row['Middle Name'] ?></a>
-                        <p>Admission No.: <?php echo $row['AdminID'] ?><br/>
-                           Present Class.: <?php echo $row['Class'] ?><br/>  
-                           Dad No..: <?php echo $row['Telephone1'] ?><br/>
-                           Mum No..: <?php echo $row['Telephone2'] ?><br/>
-                           Department.: <?php echo $row['Department'] ?>         
+                        <p>Article.: <b><?php echo $row['title'] ?></b><br/>
+                           Monthly View.:  <b><?php echo $row['view'] ?></b><br/>  
+                           Annual View..:  <b><?php echo $row['totview'] ?></b><br/>
+                           Author..:  <b><?php echo $row['author'] ?></b><br/>
+                           Author Email.: <b><?php echo $row['author_mail'] ?></b><br> 
                         </p>
               </div>
               <?php
@@ -145,18 +143,17 @@ $s = date("m");
               </div>
               <!-- /.card-header -->
              <?php
- $sql="SELECT * FROM students WHERE active= 0";
+ $sql="SELECT * FROM article ORDER BY `id` DESC LIMIT 3";
  $result_set=query($sql);
  while($row= mysqli_fetch_array($result_set))
  {
   ?>
               <div class="card-body">
-                <a class="title" href="#"><?php echo $row['SurName'] ?> <?php echo $row['Last Name'] ?> <?php echo $row['Middle Name'] ?></a>
-                        <p>Admission No.: <?php echo $row['AdminID'] ?><br/>
-                           Present Class.: <?php echo $row['Class'] ?><br/>  
-                           Dad No..: <?php echo $row['Telephone1'] ?><br/>
-                           Mum No..: <?php echo $row['Telephone2'] ?><br/>
-                           Department.: <?php echo $row['Department'] ?>         
+              <p>Article.: <b><?php echo $row['title'] ?></b><br/>
+                           Monthly View.:  <b><?php echo $row['view'] ?></b><br/>  
+                           Annual View..:  <b><?php echo $row['totview'] ?></b><br/>
+                           Author..:  <b><?php echo $row['author'] ?></b><br/>
+                           Author Email.: <b><?php echo $row['author_mail'] ?></b><br> 
                         </p>
               </div>
               <?php
@@ -179,26 +176,10 @@ $s = date("m");
                 <!-- /.card-tools -->
               </div>
               <!-- /.card-header -->
-                     <?php
- $sql="SELECT * FROM staff WHERE active = 0";
- $result_set=query($sql);
- while($row= mysqli_fetch_array($result_set))
- {
-  ?>
+                    
               <div class="card-body">
-               <p><?php echo date("d-m-y") ?></p>
-                        <p ><?php echo $row['title'] ?></p>
-                      </a>
-                      <div>
-                        <a  href="#"><?php echo $row['surname'] ?> <?php echo $row['firstname'] ?></a>
-                        <p>Staff_ID.: <b><?php echo $row['staffid'] ?></b><br/>
-                           Residential Address.: <b><?php echo $row['radd'] ?></b><br/>
-                           Telephone.: <b><?php echo $row['tel1'].", ".$row['tel2']; ?></b><br/> 
-                           Gender.:  <b><?php echo $row['gender'] ?> </b><br/>
-                        </p>
-              <?php
-            }
-            ?>
+                <p><?php echo $tot ?> - <span id="demo"></span></p>
+              
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -251,31 +232,36 @@ $s = date("m");
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-       <script>
-  if ('serviceWorker' in navigator) {
-    console.log("Will the service worker register?");
-    navigator.serviceWorker.register('service-worker.js')
-      .then(function(reg){
-        console.log("Yes, it did.");
-      }).catch(function(err) {
-        console.log("No it didn't. This happened: ", err)
-      });
+<!-- Display the countdown timer in an element -->
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?php echo $tot ?>").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
   }
-</script>
-<script src="service-worker.js">
-        // Service worker for Progressive Web App
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js', {
-            scope: '.' // THIS IS REQUIRED FOR RUNNING A PROGRESSIVE WEB APP FROM A NON_ROOT PATH
-        }).then(function(registration) {
-            // Registration was successful
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            // registration failed :(
-            console.log('ServiceWorker registration failed: ', err);
-        });
-    }
+}, 1000);
 </script>
 </body>
 </html>

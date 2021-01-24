@@ -43,7 +43,7 @@
                                     <a href="#"><img style="width: 100%; height: 250px;" src="<?php echo $row['pix']; ?>" alt=""></a>
                                 </div>
                                 <div class="post-content">
-                                    <a style="color: red; text-decoration: none;" href="./details?read=<?php echo $row['post_url']; ?>" class="post-title">
+                                    <a style="color: red; text-decoration: none;" href="./<?php echo $row['post_url']; ?>" class="post-title">
                                         <h4><?php echo $row['title']; ?></h4>
                                     </a>
                                     <div class="post-meta d-flex">

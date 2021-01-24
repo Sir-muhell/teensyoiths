@@ -30,10 +30,9 @@ if ($uploadOk == 0) {
     //constants
     $date       = date("Y-m-d h:i:sa");
     $post_url   = str_replace(' ', '-', $title); 
-    $pidr       = "tny-".rand(0, 9999);
 
     //update details into db
-    $sql = "UPDATE article SET `title` = '$title', `pix` = '$target_file', `details` = '$details', `quote` = '$quote', `post_url` = '$post_url' WHERE `pidr` = '$pidr'";
+    $sql = "UPDATE article SET `title` = '$title', `pix` = '$target_file', `details` = '$details', `quote` = '$quote', `post_url` = '$post_url' WHERE `pidr` = '$idn'";
     $res = query($sql);
 
     $_SESSION['msg'] = "  Your articles was updated successfully. ";
@@ -47,9 +46,13 @@ if ($uploadOk == 0) {
 }
 } else {
 
+    //constants
+    $date       = date("Y-m-d h:i:sa");
+    $post_url   = str_replace(' ', '-', $title);
+    
     //update details into db
-    $sql = "UPDATE article SET `title` = '$title', `details` = '$details', `quote` = '$quote', `post_url` = '$post_url' WHERE `pidr` = '$pidr'";
-    $res = query($sql);
+    $sl = "UPDATE article SET `title` = '$title', `details` = '$details', `quote` = '$quote', `post_url` = '$post_url' WHERE `pidr` = '$idn'";
+    $rs = query($sl);
 
     $_SESSION['msg'] = "  Your articles was updated successfully. ";
 

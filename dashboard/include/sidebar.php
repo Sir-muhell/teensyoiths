@@ -91,150 +91,39 @@
           </li>
          <br/>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-graduation-cap"></i>
+            <a href="./article" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
               <p>
-                Students
+               Articles
                 <i class="fas fa-angle-right right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./view" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View all Student</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./delstud" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Delete a Student</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./enroll" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Enroll New Student</p>
-                </a>
-              </li>
-              
-             
-            </ul>
           </li>
           <br/>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-eye"></i>
               <p>
-                Staffs
+               View
                 <i class="right fas fa-angle-right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./viewstaff" class="nav-link">
+                <a href="./mthview" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>View all Staffs</p>
+                  <p>Monthly View</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./delstaff" class="nav-link">
+                <a href="./annview" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Delete a Staff</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./appoint" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Appoint New Staff</p>
+                  <p>Annual View</p>
                 </a>
               </li>
             </ul>
           </li>
-          <br/>
-          <li class="nav-item has-treeview">
-            <a href="../icbt"  class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                CBT Software
-                <i class="fas fa-angle-right right"></i>
-              </p>
-            </a>
-
-          </li>
-          <br/>
-          <li class="nav-item has-treeview">
-            <a href="./results" class="nav-link">
-              <i class="nav-icon fas fa-eye"></i>
-              <p>
-               View Results
-                <i class="fas fa-angle-right right"></i>
-              </p>
-            </a>
-
-          </li>
-          <br/>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Absentees
-                <i class="fas fa-angle-right right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./abstaff" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Staff Absent Today</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./abstud" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Student Absent Today</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <br/>
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-               Send SMS
-                <i class="fas fa-angle-right right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./parent" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>To Parents</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="./staffs" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>To Staffs</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-<br/>
-<li class="nav-item has-treeview">
-            <a href="#flutterwave" class="nav-link">
-              <i class="nav-icon far fa-credit-card"></i>
-              <p>
-             Payment History
-                <i class="fas fa-angle-right right"></i>
-              </p>
-            </a>
-          </li>
-          <br/>
+          <br/> 
           <li class="nav-item has-treeview">
             <a href="./logout" class="nav-link">
               <i class="nav-icon far fa-user"></i>

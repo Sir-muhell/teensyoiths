@@ -14,7 +14,8 @@ if (!isset($_GET['read'])) {
 
         $row = mysqli_fetch_array($res);
 
-        $ipp  = $_SERVER['SERVER_ADDR'];  // get ip address
+        // get ip address
+        $ipp  = $_SERVER['SERVER_ADDR'];  
         $post_url = $data;
 
         if (isset($_SESSION['Username'])) {
@@ -290,6 +291,8 @@ if (!isset($_GET['read'])) {
         </div>
     </div> 
 
+    
+
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
@@ -302,6 +305,7 @@ if (!isset($_GET['read'])) {
     <!-- Active js -->
     <script src="js/active.js"></script>
     <script src="ajax.js"></script>
+    
 </body>
 
 </html>

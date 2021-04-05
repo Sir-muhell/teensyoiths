@@ -129,7 +129,9 @@
                 } else {
                 while($row = mysqli_fetch_array($res)) {
                     $det = $row['details'];
-                    $z = str_word_count($det);
+                    //This i what i edited 
+                    $z = substr($det,0,strpos($det,' ',50));
+                    //
                     $w = "...";
                     $y = substr_replace($det, $w, $z);
                 ?>
